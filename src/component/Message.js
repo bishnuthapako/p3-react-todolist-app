@@ -5,9 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-function Message({todoList}) {
+function Message({todoList, handleDelete}) {
 
-  console.log(todoList, 'bishnu')
+  // console.log(todoList, 'bishnu')
 
   const todoListApi = todoList.map((user)=>
   <MessageDisplayCard 
@@ -15,6 +15,7 @@ function Message({todoList}) {
   username = {user.username}
   title = {user.messages[0].title}
   message = {user.messages[0].comment}
+  handleDelete ={handleDelete}
   />
   ) 
 

@@ -21,12 +21,18 @@ useEffect(()=>{
   getTodoList()
 },[])
 
+    function handleDelete(id){
+      const deleteMessage = todoList.filter((user)=>user.id !==id)
+      setTodoList(deleteMessage)
+    }
+
+
 
   return (
     <div>
       <NavMenu />
       <div className='container mt-4'>
-        <Message todoList={todoList} />
+        <Message todoList={todoList} handleDelete={handleDelete}/>
       </div>
     </div>
   )
