@@ -10,17 +10,21 @@ function Message({todoList, handleDelete}) {
   // console.log(todoList, 'bishnu')
 
   const todoListApi = todoList.map((user)=>
-  <MessageDisplayCard 
+{
+  console.log(user.messages[0].title, 'mapuser')
+  return <MessageDisplayCard 
   key = {user.id}
+  userId = {user.id}
   username = {user.username}
   title = {user.messages[0].title}
   message = {user.messages[0].comment}
   handleDelete ={handleDelete}
-  />
+  messages = {user.messages}
+  />}
   ) 
 
 
-  return (
+  return ( 
 
     <Container>
     <Row>
