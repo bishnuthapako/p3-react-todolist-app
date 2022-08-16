@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 function CreateTask({modal, toggle, addOnInputForm}) {
-    // const [username, setUserName]=useState("") 
-    const [user_id, setUser_id]=useState("")
+   
+    const [username, setUserName]=useState("")
     const [title, setTitle]=useState("")
     const [comment, setComment]=useState("")
 
@@ -12,32 +12,26 @@ function CreateTask({modal, toggle, addOnInputForm}) {
         const inputData = {
             title: title,
             comment: comment,
-            user_id: parseInt(user_id)
+            username: username
         }
-        fetch( "http://localhost:9292/message",{
-            method: 'POST',
-            headers:{
-                    "Content-Type": "application/json",
+        fetch("http://localhost:9292/message", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
             },
-            body: JSON.stringify(inputData)
-            })  
-            .then((res)=>res.json())
-            .then((newItem)=>{
-            // addOnData(newItem)
-            // console.log(newItem, 'new')
-            addOnInputForm(newItem)
-            }
-                )
-
-    }
+            body: JSON.stringify(inputData),
+        })
+            .then((r) => r.json())
+            .then((newItem) =>  addOnInputForm(newItem));
+        }
 
 
 
 
     function handleInputSubmit(e){
         const {name, value}=e.target
-        if(name ==="user_id"){
-            setUser_id(value)
+        if(name ==="username"){
+            setUserName(value)
         } else if(name === "title"){
             setTitle(value)
         } else {
@@ -52,12 +46,12 @@ function CreateTask({modal, toggle, addOnInputForm}) {
             <ModalBody>
                 <form onSubmit={handleSubmitForm}>
                 <div className='form-group'>
-                        <label>Enter Any User Id</label>
-                        <input type="text" className='form-control' name='user_id' value={user_id} onChange={handleInputSubmit} required/>
+                        <label>Enter Username</label>
+                        <input type="text" className='form-control' name='username' value={username} onChange={handleInputSubmit} required/>
                     </div>
                 <div className='form-group'>
                         <label>Enter The Headline</label>
-                        <input type="text" className='form-control' name='title' value={title} onChange={handleInputSubmit} required/>
+                        <input type="text" className='form-control' name= 'title' value={title} onChange={handleInputSubmit} required/>
                     </div>
                     
                     <div className='form-group'>

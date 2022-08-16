@@ -9,7 +9,7 @@ function NavMenu() {
 
 
     function addOnInputForm(newItems){
-      setInputTask({...inputTask, newItems})
+      setInputTask([...inputTask, newItems])
     }
 
 
