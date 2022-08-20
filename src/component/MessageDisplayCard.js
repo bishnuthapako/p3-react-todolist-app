@@ -31,7 +31,8 @@ function MessageDisplayCard({username, userId, title, message, handleDelete, mes
       <Card.Header as="h5">{username}</Card.Header>
       <Card.Body>
         <Card.Title>{title}</Card.Title> 
-        <Card.Text>{message} </Card.Text>
+        <Card.Text>{message} </Card.Text> 
+
         <Button variant="outline-light" style={{"cursor":"pointer"}} onClick={()=>setModal(true)}><i className="fa-solid fa-file-pen"></i></Button>{' '}
         <Button variant="outline-light" style={{"cursor":"pointer"}} onClick={()=>handleDeleteButton(userId)}><i className="fa-solid fa-trash"></i></Button>{' '}
       </Card.Body>
