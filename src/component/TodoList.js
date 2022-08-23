@@ -7,7 +7,7 @@ function TodoList() {
 const [todoList, setTodoList]=useState([])
 const [isLoading, setIsLoading]=useState(false)
 
-// console.log(todoList, 'todo')
+console.log(todoList, 'todo')
 
 const api = "http://localhost:9292/users"
 const getTodoList = async ()=>{
@@ -24,6 +24,19 @@ useEffect(()=>{
     function handleDelete(id){
       const deleteMessage = todoList.filter((user)=>user.id !==id)
       setTodoList(deleteMessage)
+      window.location.reload()
+    }
+
+    function handleUpdateItem(updateItem){
+      console.log(updateItem, 'update')
+      const updateItems = todoList.map((item)=>{
+        if(item.id===updateItem.id){
+          return updateItem;
+        } else{
+          return item
+        }
+      });
+      setTodoList(updateItems)
     }
 
 
@@ -32,7 +45,7 @@ useEffect(()=>{
     <div>
       <NavMenu />
       <div className='container mt-4'>
-        <Message todoList={todoList} handleDelete={handleDelete}/>
+        <Message todoList={todoList} handleDelete={handleDelete} onUpdateItem={handleUpdateItem}/>
       </div>
     </div>
   )

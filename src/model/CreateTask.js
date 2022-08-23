@@ -9,11 +9,12 @@ function CreateTask({modal, toggle, addOnInputForm}) {
 
     function handleSubmitForm(e){
         e.preventDefault()
-        const inputData = {
+        const inputData = [{
+            username: username,
             title: title,
-            comment: comment,
-            username: username
-        }
+            comment: comment            
+        }]
+        
         fetch("http://localhost:9292/message", {
             method: "POST",
             headers: {
@@ -60,12 +61,8 @@ function CreateTask({modal, toggle, addOnInputForm}) {
                     </div>
 
                     <ModalFooter>
-                            <Button color="primary" onClick={toggle}>
-                                Create
-                            </Button>{' '}
-                            <Button color="secondary" onClick={toggle}>
-                                Cancel
-                            </Button>
+                            <Button color="primary" onClick={toggle}>Create</Button>{' '}
+                            <Button color="secondary" onClick={toggle}>Cancel</Button>{' '}
                     </ModalFooter>
 
                 </form>
