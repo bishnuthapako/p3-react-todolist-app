@@ -12,10 +12,10 @@ function EditMessage({modal, toggle, onUpdateItem, editMessage, messageTitle, eM
 function handleFormSubmit(e){
     e.preventDefault();
 
-    const inputData=[{
+    const inputData={
         title: title,
         comment: comment
-    }]
+    }
 
 
     fetch(`http://localhost:9292/message/${eMessage.id}`,{
@@ -24,8 +24,11 @@ function handleFormSubmit(e){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(inputData)
-    }).then ((r)=>r.json)
-    .then((updateMessage)=>onUpdateItem(updateMessage))
+    }).then ((r)=>r.json())
+    .then((updateMessage)=>{
+        console.log(updateMessage,'message' )
+        onUpdateItem(updateMessage)
+    })
     
 }
 
@@ -56,7 +59,7 @@ const {name, value}=e.target
                     </div>
 
                     <ModalFooter>
-                            <Button color="primary" onClick={toggle}>
+                            <Button type='submit' color="primary" onClick={toggle}>
                                 Update
                             </Button>{' '}
                             <Button color="secondary" onClick={toggle}>

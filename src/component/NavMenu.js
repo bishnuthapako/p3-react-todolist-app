@@ -2,14 +2,18 @@ import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import CreateTask from '../model/CreateTask';
 
-function NavMenu() {
+function NavMenu({todoList, setTodoList}) {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
-    const [inputTask, setInputTask]=useState([])
+    // const [message, setMessage]=useState([])
 
+    function addOnInputForm(newMessage){
+      let clonedArray = JSON.parse(JSON.stringify(todoList))
+          clonedArray.find((user)=>user.id===newMessage.user_id).messages.unshift(newMessage)
+        // debugger;
 
-    function addOnInputForm(newItems){
-      setInputTask([...inputTask, newItems])
+      // copyTodoList.find()
+      setTodoList(clonedArray)
     }
 
 
@@ -18,7 +22,7 @@ function NavMenu() {
         <h1>ToDo List</h1>
         <Button className='btn-todolist mt-3' variant="danger" onClick={()=>setModal(true)}>Create ToDo Task</Button>
         </div>
-        <CreateTask modal={modal} toggle = {toggle} addOnInputForm={addOnInputForm}/>
+        <CreateTask modal={modal} toggle = {toggle} addOnInputForm={addOnInputForm} />
         </>
 }
 

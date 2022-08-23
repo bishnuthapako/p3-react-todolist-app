@@ -12,7 +12,7 @@ function Cards({handleDelete, user_id, title, message, onUpdateItem, editMessage
   const toggle = () => setModal(!modal);
 
   function handleDeleteButton(id) {
-    console.log(id, 'id')
+    // console.log(id, 'id')
       {
         if(window.confirm('Are you sure?'))
         {

@@ -9,11 +9,11 @@ function CreateTask({modal, toggle, addOnInputForm}) {
 
     function handleSubmitForm(e){
         e.preventDefault()
-        const inputData = [{
+        const inputData = {
             username: username,
             title: title,
             comment: comment            
-        }]
+        }
         
         fetch("http://localhost:9292/message", {
             method: "POST",
@@ -23,7 +23,11 @@ function CreateTask({modal, toggle, addOnInputForm}) {
             body: JSON.stringify(inputData),
         })
             .then((r) => r.json())
-            .then((newItem) =>  addOnInputForm(newItem));
+            .then((newItem) =>  {
+                // console.log(newItem, 'newItem')
+        
+                addOnInputForm(newItem)
+            });
         }
 
 
@@ -61,7 +65,7 @@ function CreateTask({modal, toggle, addOnInputForm}) {
                     </div>
 
                     <ModalFooter>
-                            <Button color="primary" onClick={toggle}>Create</Button>{' '}
+                            <Button type='submit' color="primary" onClick={toggle}>Create</Button>{' '}
                             <Button color="secondary" onClick={toggle}>Cancel</Button>{' '}
                     </ModalFooter>
 

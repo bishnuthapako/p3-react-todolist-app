@@ -5,16 +5,16 @@ import Message from './Message'
 function TodoList() {
 
 const [todoList, setTodoList]=useState([])
-const [isLoading, setIsLoading]=useState(false)
+// const [isLoading, setIsLoading]=useState(false)
 
-console.log(todoList, 'todo')
+// console.log(todoList, 'todo')
 
 const api = "http://localhost:9292/users"
 const getTodoList = async ()=>{
   const response = await fetch(api)
   const data = await response.json()
   setTodoList(data)
-  setIsLoading(true)
+  // setIsLoading(true)
 }
 
 useEffect(()=>{
@@ -28,22 +28,26 @@ useEffect(()=>{
     }
 
     function handleUpdateItem(updateItem){
-      console.log(updateItem, 'update')
-      const updateItems = todoList.map((item)=>{
-        if(item.id===updateItem.id){
+      let updateArray = JSON.parse(JSON.stringify(todoList))
+      const findUser = updateArray.find((user)=>user.id ===updateItem.user_id)
+      // debugger;
+       const newUpdateMessage = findUser.messages.map((message)=>{
+        if(message.id===updateItem.id){
           return updateItem;
         } else{
-          return item
+          return message
         }
-      });
-      setTodoList(updateItems)
+      })
+      // debugger;
+      findUser.messages = newUpdateMessage
+      setTodoList(updateArray.map((user)=>user.id===findUser.id? findUser:user))
     }
 
 
 
   return (
     <div>
-      <NavMenu />
+      <NavMenu todoList={todoList} setTodoList={setTodoList}/>
       <div className='container mt-4'>
         <Message todoList={todoList} handleDelete={handleDelete} onUpdateItem={handleUpdateItem}/>
       </div>
